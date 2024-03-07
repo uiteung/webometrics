@@ -27,6 +27,12 @@ fetch(UrlGetAllBuku, requestOptionsGet)
                         <td style="text-align: center; vertical-align: middle">
                             <p class="fw-normal mb-1">${values.nama_dosen}</p>
                         </td>
+						<td style="text-align: center; vertical-align: middle">
+							<p class="fw-normal mb-1">D4 Teknik Informatika</p>
+						</td>
+						<td style="text-align: center; vertical-align: middle">
+							<p class="fw-normal mb-1">Sekolah Vokasi</p>
+						</td>
                         <td style="text-align: center; vertical-align: middle">
                             <p class="fw-normal mb-1">${values.judul_buku}</p>
                         </td>

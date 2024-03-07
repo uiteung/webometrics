@@ -23,6 +23,8 @@
 
 <body>
 	<div class="wrapper">
+
+		<!-- Sidebar Start -->
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" style="text-align: center;" href="index.html">
@@ -78,9 +80,12 @@
 				</div> -->
 			</div>
 		</nav>
+		<!-- Sidebar End -->
 
 		<div class="main">
-			<nav class="navbar navbar-expand navbar-light navbar-bg">
+		
+		<!-- Navbar Start -->
+		<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
           <i class="hamburger align-self-center"></i>
         </a>
@@ -103,7 +108,8 @@
 						</li>
 					</ul>
 				</div>
-			</nav>
+		</nav>
+		<!-- Navbar End -->
 
 			<!-- Main Content Start -->
 			<main class="content">
@@ -145,6 +151,8 @@
 								  <th hidden></th>
 								  <th>No</th>
 								  <th>Nama Dosen</th>
+								  <th>Program Studi</th>
+								  <th>Fakultas</th>
 								  <th>Judul Buku</th>
 								  <th>Tahun Terbit</th>
 								  <th>Nama Penerbit</th>
@@ -155,23 +163,11 @@
 								  <th>Jumlah Kutipan</th>
 								</tr>
 							  </thead>
-							  <tbody id="tablebody">
-							  </tbody>
-							  <tfoot>
-								<tr style="text-align: center; vertical-align: middle">
-								  <th hidden></th>
-								  <th>No</th>
-								  <th>Nama Dosen</th>
-								  <th>Judul Buku</th>
-								  <th>Tahun Terbit</th>
-								  <th>Nama Penerbit</th>
-								  <th>Jenis Publikasi</th>
-								  <th>Ranking</th>
-								  <th>Jenis Penelitian</th>
-								  <th>Autor</th>
-								  <th>Jumlah Kutipan</th>
-								</tr>
-							  </tfoot>
+
+							  <!-- Data Rekap Buku -->
+							  <tbody id="tablebody"></tbody>
+							  <!-- Data Rekap Buku -->
+
 							</table>
 						  </div>
 						  <div class="row">
@@ -196,9 +192,10 @@
 					</div>
 				  </div>
 				</div>
-			  </main>
-			  <!-- Main Content End -->
+			</main>
+			<!-- Main Content End -->
 
+			<!-- Footer Start -->
 			<footer class="footer">
 				<div class="container-fluid">
 					<div class="row text-muted">
@@ -210,6 +207,8 @@
 					</div>
 				</div>
 			</footer>
+			<!-- Footer End -->
+
 		</div>
 	</div>
 	<script src="static/js/style.js"></script>
