@@ -1,108 +1,127 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/table/table.js";
-import { UrlGetAllPublikasi, requestOptionsGet } from "./controller/template.js";
+import { UrlGetAllPublikasiByKodeProdi, requestOptionsGet } from "./controller/template.js";
+import { getNameByCode } from "./style/codemapping.js";
 
-// Untuk Membuat Pagination
 CihuyDomReady(() => {
-	const tablebody = CihuyId("tablebody");
-	const buttonsebelumnya = CihuyId("prevPageBtn");
-	const buttonselanjutnya = CihuyId("nextPageBtn");
-	const halamansaatini = CihuyId("currentPage");
-	const itemperpage = 5;
-	let halamannow = 1;
+    const tablebody = CihuyId("tablebody");
+    const buttonsebelumnya = CihuyId("prevPageBtn");
+    const buttonselanjutnya = CihuyId("nextPageBtn");
+    const halamansaatini = CihuyId("currentPage");
+    const itemperpage = 15;
+    let halamannow = 1;
 
-fetch(UrlGetAllPublikasi, requestOptionsGet)
-	.then((result) => {
-		return result.json();
-	})
-	.then((data) => {
-		let tableData = "";
-		data.data.map((values) => {
-			tableData += `
+    const prodiSelect = CihuyId("prodiSelect");
+
+    // Tambahkan event listener untuk perubahan pada input pilihan prodi
+    prodiSelect.addEventListener("change", function() {
+        const selectedProdiId = this.value;
+        const GetAllPublikasiByKodeProdi = UrlGetAllPublikasiByKodeProdi+ `?kode_prodi=${selectedProdiId}`;
+
+        // Fetch data dari API berdasarkan prodi yang dipilih
+        fetchData(GetAllPublikasiByKodeProdi);
+    });
+
+    // Fungsi untuk mengambil dan menampilkan data dari API
+    function fetchData(GetAllPublikasiByKodeProdi) {
+        fetch(GetAllPublikasiByKodeProdi, requestOptionsGet)
+            .then((result) => {
+                return result.json();
+            })
+            .then((data) => {
+                let tableData = "";
+                data.data.map((values) => {
+                    tableData += `
                         <tr>
-                        <td hidden></td>
-                        <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${values.id}</p>
-                        </td>
-                        <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${values.nama_dosen}</p>
-                        </td>
-						<td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">D4 Teknik Informatika</p>
-                        </td>
-						<td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">Sekolah Vokasi</p>
-                        </td>
-                        <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${values.judul_paper}</p>
-                        </td>
-                        <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${values.tahun_terbit}</p>
-                        </td>
-                        <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${values.nama_publikasi}</p>
-                        </td>
-                        <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${values.jenis_publikasi}</p>
-                        </td>
-                        <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${values.ranking}</p>
-                        </td>
-                        <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${values.jenis_penelitian}</p>
-                        </td>
-                        <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${values.autor}</p>
-                        </td>
-                        <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${values.jumlah_kutipan}</p>
-                        </td>
-                    </tr>`;
-		});
-		document.getElementById("tablebody").innerHTML = tableData;
+                            <td hidden></td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <p class="fw-normal mb-1">${values.id}</p>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <p class="fw-normal mb-1">${values.nama_dosen}</p>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <p class="fw-normal mb-1">${getNameByCode(values.kode_prodi)}</p>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <p class="fw-normal mb-1">${values.judul_paper}</p>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <p class="fw-normal mb-1">${values.tahun_terbit}</p>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <p class="fw-normal mb-1">${values.nama_publikasi}</p>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <p class="fw-normal mb-1">${values.jenis_publikasi}</p>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <p class="fw-normal mb-1">${values.ranking}</p>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <p class="fw-normal mb-1">${values.jenis_penelitian}</p>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <p class="fw-normal mb-1">${values.autor}</p>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <p class="fw-normal mb-1">${values.jumlah_kutipan}</p>
+                            </td>
+                        </tr>`;
+                });
+                document.getElementById("tablebody").innerHTML = tableData;
 
-		displayData(halamannow);
-		updatePagination();
+                displayData(halamannow);
+                updatePagination();
+            })
+            .catch(error => {
+                console.log('error', error);
+            });
+    }
 
-		
-	})
-	.catch(error => {
-		console.log('error', error);
-	});
+    // Fungsi untuk menampilkan data
+    function displayData(page) {
+        const baris = CihuyQuerySelector("#tablebody tr");
+        const mulaiindex = (page - 1) * itemperpage;
+        const akhirindex = mulaiindex + itemperpage;
 
-function displayData(page) {
-	const baris = CihuyQuerySelector("#tablebody tr");
-	const mulaiindex = (page - 1) * itemperpage;
-	const akhirindex = mulaiindex + itemperpage;
+        for (let i = 0; i < baris.length; i++) {
+            if (i >= mulaiindex && i < akhirindex) {
+                baris[i].style.display = "table-row";
+            } else {
+                baris[i].style.display = "none";
+            }
+        }
+    }
 
-	for (let i = 0; i < baris.length; i++) {
-		if (i >= mulaiindex && i < akhirindex) {
-			baris[i].style.display = "table-row";
-		} else {
-			baris[i].style.display = "none";
-		}
-	}
-}
-function updatePagination() {
-	halamansaatini.textContent = `Halaman ${halamannow}`;
-}
+    // Fungsi untuk memperbarui informasi halaman saat ini
+    function updatePagination() {
+        halamansaatini.textContent = `Halaman ${halamannow}`;
+    }
 
-buttonsebelumnya.addEventListener("click", () => {
-	if (halamannow > 1) {
-		halamannow--;
-		displayData(halamannow);
-		updatePagination();
-	}
-});
+    // Event listener untuk tombol sebelumnya
+    buttonsebelumnya.addEventListener("click", () => {
+        if (halamannow > 1) {
+            halamannow--;
+            displayData(halamannow);
+            updatePagination();
+        }
+    });
 
-buttonselanjutnya.addEventListener("click", () => {
-	const totalPages = Math.ceil(
-		tablebody.querySelectorAll("#tablebody tr").length / itemperpage
-	);
-	if (halamannow < totalPages) {
-		halamannow++;
-		displayData(halamannow);
-		updatePagination();
-	}
-  });
+    // Event listener untuk tombol selanjutnya
+    buttonselanjutnya.addEventListener("click", () => {
+        const totalPages = Math.ceil(
+            tablebody.querySelectorAll("#tablebody tr").length / itemperpage
+        );
+        if (halamannow < totalPages) {
+            halamannow++;
+            displayData(halamannow);
+            updatePagination();
+        }
+    });
+
+    // Memanggil fungsi fetchData dengan nilai awal pilihan prodi
+    const initialProdiId = prodiSelect.value;
+    const initialUrl = `${UrlGetAllPublikasiByKodeProdi}/kode_prodi=${initialProdiId}`;
+    fetchData(initialUrl);
 });
