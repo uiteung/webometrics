@@ -172,7 +172,7 @@
                       <!-- Rekap Grafik End -->
 
                       <!-- Rekap Tabel Start -->
-                      <div class="card" id="rekapTabelRekap">
+                      <div class="card" id="rekapTabelRekap" hidden>
 						<div class="card-header">
                             <div class="row no-gutters" style="height: 40px">
                               <h1 class="h3 mt-2">Tabel Rekap Jumlah Kutipan Publikasi</h1>
@@ -212,17 +212,17 @@
   
                               </table>
                             </div>
-                            <div class="row">
+                            <div class="row mt-2">
                               <div class="col-md-6">
                                 <div class="pagination">
                                   <button
-                                    id="prevPageBtn"
+                                    id="prevPageBtnRekap"
                                     class="btn btn-primary">
                                     Previous
                                   </button>
-                                  <span id="currentPage" class="mx-2">Halaman 1</span>
+                                  <span id="currentPageRekap" class="mx-2">Halaman 1</span>
                                   <button
-                                    id="nextPageBtn"
+                                    id="nextPageBtnRekap"
                                     class="btn btn-primary">
                                     Next
                                   </button>
@@ -232,7 +232,7 @@
                         </div>
 					  </div>
 
-                      <div class="card" id="rekapTabelRekapJenis">
+                      <div class="card" id="rekapTabelRekapJenis" hidden>
 						<div class="card-header">
                             <div class="row no-gutters" style="height: 40px">
                               <h1 class="h3 mt-2">Tabel Rekap Jumlah Kutipan Publikasi Berdasarkan Jenis Publikasi</h1>
@@ -264,7 +264,6 @@
                                     <th>Tahun Terbit</th>
                                     <th>Jenis Publikasi</th>
                                     <th>Jumlah Citasi Publikasi</th>
-                                    <th>Total Citasi</th>
                                   </tr>
                                 </thead>
   
@@ -274,17 +273,17 @@
   
                               </table>
                             </div>
-                            <div class="row">
+                            <div class="row mt-2">
                               <div class="col-md-6">
                                 <div class="pagination">
                                   <button
-                                    id="prevPageBtn"
+                                    id="prevPageBtnRekapJenis"
                                     class="btn btn-primary">
                                     Previous
                                   </button>
-                                  <span id="currentPage" class="mx-2">Halaman 1</span>
+                                  <span id="currentPageRekapJenis" class="mx-2">Halaman 1</span>
                                   <button
-                                    id="nextPageBtn"
+                                    id="nextPageBtnRekapJenis"
                                     class="btn btn-primary">
                                     Next
                                   </button>
@@ -317,7 +316,7 @@
 
 		</div>
 	</div>
-	<script src="static/js/style.js"></script>
+	<script src="static/js/publikasi_style.js"></script>
 	<script src="static/js/app.js"></script>
     <script src="static/js/publikasi_graph.js" type="module"></script>
 </body>
