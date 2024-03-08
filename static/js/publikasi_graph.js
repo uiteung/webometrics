@@ -1,17 +1,17 @@
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/table/table.js";
-import { requestOptionsGet } from "./controller/template.js";
+import { UrlGetRekapCitasiPublikasiPertahun, UrlGetRekapCitasiPublikasiPertahunByJenis, requestOptionsGet } from "./controller/template.js";
 
 // Fetch Data Rekap Citasi Pertahun
 CihuyDomReady(() => {
-	const tablebody = CihuyId("tablebody");
-	const buttonsebelumnya = CihuyId("prevPageBtn");
-	const buttonselanjutnya = CihuyId("nextPageBtn");
-	const halamansaatini = CihuyId("currentPage");
+	const tablebody = CihuyId("tablebodyRekap");
+	const buttonsebelumnya = CihuyId("prevPageBtnRekap");
+	const buttonselanjutnya = CihuyId("nextPageBtnRekap");
+	const halamansaatini = CihuyId("currentPageRekap");
 	const itemperpage = 5;
 	let halamannow = 1;
 
-fetch("https://simbe-dev.ulbi.ac.id/api/v1/webometrics/publikasi/rekapcitasi", requestOptionsGet)
+fetch(UrlGetRekapCitasiPublikasiPertahun, requestOptionsGet)
 	.then((result) => {
 		return result.json();
 	})
@@ -30,11 +30,8 @@ fetch("https://simbe-dev.ulbi.ac.id/api/v1/webometrics/publikasi/rekapcitasi", r
                     </tr>`;
 		});
 		document.getElementById("tablebodyRekap").innerHTML = tableData;
-
 		displayData(halamannow);
 		updatePagination();
-
-		
 	})
 	.catch(error => {
 		console.log('error', error);
@@ -68,6 +65,105 @@ buttonsebelumnya.addEventListener("click", () => {
 buttonselanjutnya.addEventListener("click", () => {
 	const totalPages = Math.ceil(
 		tablebody.querySelectorAll("#tablebodyRekap tr").length / itemperpage
+	);
+	if (halamannow < totalPages) {
+		halamannow++;
+		displayData(halamannow);
+		updatePagination();
+	}
+  });
+});
+
+// Fetch Rekap Data Citasi Pertahun By Jenis Publikasi
+CihuyDomReady(() => {
+	const tablebody = CihuyId("tablebodyRekapJenis");
+	const buttonsebelumnya = CihuyId("prevPageBtnRekapJenis");
+	const buttonselanjutnya = CihuyId("nextPageBtnRekapJenis");
+	const halamansaatini = CihuyId("currentPageRekapJenis");
+	const itemperpage = 50;
+	let halamannow = 1;
+
+    fetch(UrlGetRekapCitasiPublikasiPertahunByJenis, requestOptionsGet)
+        .then((result) => {
+            return result.json();
+        })
+        .then((data) => {
+            let groupedData = {};
+
+            // Kelompokkan data berdasarkan tahun terbit
+            data.data.forEach((item) => {
+                if (!groupedData[item.tahun_terbit]) {
+                    groupedData[item.tahun_terbit] = [];
+                }
+
+                groupedData[item.tahun_terbit].push({
+                    jenis_publikasi: item.jenis_publikasi,
+                    jumlah_kutipan: item.jumlah_kutipan
+                });
+            });
+
+            let tableData = "";
+            // Bangun tabel dari data yang sudah dikelompokkan
+            Object.keys(groupedData).forEach((tahun) => {
+                tableData += `
+                    <tr>
+                        <td hidden></td>
+                        <td style="text-align: center; vertical-align: middle" rowspan="${groupedData[tahun].length}">
+                            <p class="fw-normal mb-1">${tahun}</p>
+                        </td>`;
+
+                    groupedData[tahun].forEach((jenis, index) => {
+                        if (index !== 0) {
+                            tableData += `<tr>`;
+                        }
+                    tableData += `
+                        <td hidden></td>
+                        <td style="text-align: center; vertical-align: middle">
+                            <p class="fw-normal mb-1">${jenis.jenis_publikasi}</p>
+                        </td>
+                        <td style="text-align: center; vertical-align: middle">
+                            <p class="fw-normal mb-1">${jenis.jumlah_kutipan} Kutipan</p>
+                        </td>
+                    </tr>`;
+                });
+            });
+
+            document.getElementById("tablebodyRekapJenis").innerHTML = tableData;
+            displayData(halamannow);
+            updatePagination();
+        })
+        .catch(error => {
+            console.log('error', error);
+    });
+
+function displayData(page) {
+	const baris = CihuyQuerySelector("#tablebodyRekapJenis tr");
+	const mulaiindex = (page - 1) * itemperpage;
+	const akhirindex = mulaiindex + itemperpage;
+
+	for (let i = 0; i < baris.length; i++) {
+		if (i >= mulaiindex && i < akhirindex) {
+			baris[i].style.display = "table-row";
+		} else {
+			baris[i].style.display = "none";
+		}
+	}
+}
+function updatePagination() {
+	halamansaatini.textContent = `Halaman ${halamannow}`;
+}
+
+buttonsebelumnya.addEventListener("click", () => {
+	if (halamannow > 1) {
+		halamannow--;
+		displayData(halamannow);
+		updatePagination();
+	}
+});
+
+buttonselanjutnya.addEventListener("click", () => {
+	const totalPages = Math.ceil(
+		tablebody.querySelectorAll("#tablebodyRekapJenis tr").length / itemperpage
 	);
 	if (halamannow < totalPages) {
 		halamannow++;
