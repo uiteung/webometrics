@@ -18,3 +18,6 @@ export let UrlGetRekapCitasiPublikasiPertahun = "https://simbe-dev.ulbi.ac.id/ap
 export let UrlGetRekapCitasiPublikasiPertahunByJenis = "https://simbe-dev.ulbi.ac.id/api/v1/webometrics/publikasi/citasijenistahun";
 export let UrlGetRekapCitasiBukuPertahun = "https://simbe-dev.ulbi.ac.id/api/v1/webometrics/buku/rekapcitasi";
 export let UrlGetRekapCitasiBukuPertahunByJenis = "https://simbe-dev.ulbi.ac.id/api/v1/webometrics/buku/citasijenistahun";
+
+export let UrlGetAllBukuByKodeProdi = "https://simbe-dev.ulbi.ac.id/api/v1/webometrics/buku/get";
+export let UrlGetAllPublikasiByKodeProdi = "https://simbe-dev.ulbi.ac.id/api/v1/webometrics/publikasi/get"
