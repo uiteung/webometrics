@@ -36,13 +36,13 @@
 						Submenu Webometrics
 					</li>
 
-					<li class="sidebar-item active">
+					<li class="sidebar-item">
 						<a class="sidebar-link" href="index.html">
               <i class="align-middle" data-feather="book"></i> <span class="align-middle">Dashboard</span>
             </a>
 					</li>
 
-					<li class="sidebar-item">
+					<li class="sidebar-item active">
 						<a class="sidebar-link" href="publikasi_view.html">
               <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Data Publikasi</span>
             </a>
@@ -120,21 +120,84 @@
 			<!-- Main Content Start -->
 			<main class="content">
 				<div class="container-fluid p-0">
-
-					<h1 class="h3 mb-3">Blank Page</h1>
-
-					<div class="row">
-						<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-									<h5 class="card-title mb-0">Empty card</h5>
-								</div>
-								<div class="card-body">
-								</div>
+				  <h5 class="right-aligned" style="float: right">
+					<a href="index.html">Home</a> / Data Publikasi
+				  </h5>
+				  <h1 class="h3 mb-3"><b>Rekap Publikasi</b></h1>
+				  <a href="publikasi_graph.html" class="btn btn-primary mb-3">Lihat Grafik & Rekap</a>
+				  <div class="row justify-content-center">
+					<div class="col-12">
+					  <div class="card">
+						<div class="card-header">
+						  <div class="row no-gutters" style="height: 40px">
+							<h1 class="h3 mt-2">Tabel Rekap Publikasi</h1>
+							<div
+							  class="col-md-3"
+							  style="
+								position: absolute;
+								top: 0;
+								right: 0;
+								width: 15%;
+								margin-top: 20px;
+							  ">
+							  <input
+								type="text"
+								class="form-control"
+								id="searchInput"
+								placeholder="Cari" />
 							</div>
-						</div>
-					</div>
+						  </div>
+	  
+						  <hr />
+						  <div class="table-container">
+							<table
+							  class="table table-striped"
+							  style="width: 100%">
+							  <thead>
+								<tr style="text-align: center; vertical-align: middle">
+								  <th hidden></th>
+								  <th>No</th>
+								  <th>Nama Dosen</th>
+								  <th>Program Studi</th>
+								  <th>Fakultas</th>
+								  <th>Judul Paper</th>
+								  <th>Tahun Terbit</th>
+								  <th>Nama Publikasi/Jurnal/Penerbit</th>
+								  <th>Jenis Publikasi</th>
+								  <th>Ranking</th>
+								  <th>Jenis Penelitian</th>
+								  <th>Autor</th>
+								  <th>Jumlah Kutipan</th>
+								</tr>
+							  </thead>
 
+							  <!-- Data Rekap Publikasi -->
+							  <tbody id="tablebody"></tbody>
+							  <!-- Data Rekap Publikasi -->
+
+							</table>
+						  </div>
+						  <div class="row">
+							<div class="col-md-6">
+							  <div class="pagination">
+								<button
+								  id="prevPageBtn"
+								  class="btn btn-primary">
+								  Previous
+								</button>
+								<span id="currentPage" class="mx-2">Halaman 1</span>
+								<button
+								  id="nextPageBtn"
+								  class="btn btn-primary">
+								  Next
+								</button>
+							  </div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
 				</div>
 			</main>
 			<!-- Main Content End -->
