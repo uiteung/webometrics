@@ -127,7 +127,7 @@
 						<div class="col-xl-6 col-xxl-5 d-flex">
 							<div class="w-100">
 								<div class="row">
-									<div class="col-sm-6">
+									<div class="col-sm-12">
 										<div class="card">
 											<div class="card-body">
 												<div class="row">
@@ -151,27 +151,6 @@
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Jurnal Internasional</h5>
-													</div>
-
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="file"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3" id="jurnalInter"></h1>
-												<div class="mb-0">
-													<span class="text-muted">Total Keseluruhan</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
 														<h5 class="card-title">Jumlah Kutipan Buku</h5>
 													</div>
 
@@ -182,25 +161,6 @@
 													</div>
 												</div>
 												<h1 class="text-warning mt-1 mb-3" id="jumlahBuku"></h1>
-												<div class="mb-0">
-													<span class="text-muted">Total Keseluruhan</span>
-												</div>
-											</div>
-										</div>
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Jurnal Nasional</h5>
-													</div>
-
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="file"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3" id="jurnalNasional"></h1>
 												<div class="mb-0">
 													<span class="text-muted">Total Keseluruhan</span>
 												</div>
@@ -227,6 +187,21 @@
 						</div>
 						<!-- Line Chart Pertumbuhan Jumlah Kutipan End -->
 					</div>
+					<div class="card">
+						<div class="col-12 col-lg-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title">Rekap Jumlah Citasi Publikasi Pertahun Berdasarkan Jenis Publikasi</h5>
+									<h6 class="card-subtitle text-muted">Berikut di bawah ini rekap jumlah citasi publikasi pertahun Berdasarkan jenis publikasi.</h6>
+								</div>
+								<div class="card-body">
+									<div class="chart">
+										<canvas id="chartjs-dashboard-bar"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</main>
 			<!-- Main Content End -->
@@ -249,6 +224,7 @@
 	</div>
 	<script src="static/js/app.js"></script>
 	<script src="static/js/index.js" type="module"></script>
+	<script src="static/js/style/codemapping.js" type="module"></script>
 </body>
 
 </html>
