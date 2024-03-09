@@ -131,6 +131,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+// Fetch data untuk line chart per prodi
 document.addEventListener("DOMContentLoaded", function() {
     var myChart; // Variabel untuk menyimpan instansiasi Chart
 
