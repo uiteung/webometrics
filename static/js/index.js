@@ -121,3 +121,74 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error("Error fetching data:", error);
     });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    fetch('https://simbe-dev.ulbi.ac.id/api/v1/webometrics/publikasi/citasiprodi', requestOptionsGet)
+        .then(response => response.json())
+        .then(data => {
+            // Objek untuk menghubungkan kode prodi dengan nama prodi
+            const namaProdi = {
+              14: "D4 Teknik Informatika",
+              13: "D3 Teknik Informatika",
+              23: "D3 Manajemen Informatika",
+              33: "D3 Akuntansi",
+              34: "D4 Akuntansi Keuangan",
+              43: "D3 Manajemen Pemasaran",
+              44: "D4 Manajemen Perusahaan",
+              53: "D3 Administrasi Logistik",
+              54: "D4 Logistik Bisnis",
+              74: "D4 Logistik Niaga",
+              81: "S1 Manajemen Transportasi",
+              82: "S1 Manajemen Logistik",
+              83: "S1 Bisnis Digital",
+              84: "S1 Sains Data",
+              85: "S1 Manajemen Rekayasa",
+              101: "S2 Manajemen Logistik"
+            };
+
+            const labels = data.data.map(entry => namaProdi[entry.kode_prodi.toString()]); // Menggunakan nama prodi sebagai label
+            const kutipan = data.data.map(entry => entry.jumlah_kutipan); // Mengambil jumlah kutipan dari respons API
+
+            // Membuat bar chart dengan Chart.js
+            new Chart(document.getElementById("chartjs-dashboard-bar"), {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: "Jumlah Kutipan",
+                        backgroundColor: window.theme.primary,
+                        borderColor: window.theme.primary,
+                        hoverBackgroundColor: window.theme.primary,
+                        hoverBorderColor: window.theme.primary,
+                        data: kutipan,
+                        barPercentage: 0.75,
+                        categoryPercentage: 0.5
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false
+                    },
+                    scales: {
+                        yAxes: [{
+                            gridLines: {
+                                display: false
+                            },
+                            stacked: false,
+                            ticks: {
+                                stepSize: 100 // Sesuaikan langkah kenaikan sumbu y sesuai kebutuhan
+                            }
+                        }],
+                        xAxes: [{
+                            stacked: false,
+                            gridLines: {
+                                color: "transparent"
+                            }
+                        }]
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+});
