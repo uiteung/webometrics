@@ -1,183 +1,25 @@
-import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
-import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/table/table.js";
 import { UrlGetRekapCitasiBukuPertahun, UrlGetRekapCitasiBukuPertahunByJenis, requestOptionsGet } from "./controller/template.js";
 
-// Fetch Data Rekap Citasi Pertahun
-CihuyDomReady(() => {
-	const tablebody = CihuyId("tablebodyRekap");
-	const buttonsebelumnya = CihuyId("prevPageBtnRekap");
-	const buttonselanjutnya = CihuyId("nextPageBtnRekap");
-	const halamansaatini = CihuyId("currentPageRekap");
-	const itemperpage = 5;
-	let halamannow = 1;
+document.addEventListener("DOMContentLoaded", function() {
+    const prodiSelect = document.getElementById("prodiSelect");
+    const rekapGrafikD4TI = document.getElementById("rekapGrafikD4TI");
+    const grafikAllProdi = document.getElementById("grafikAllProdi");
 
-fetch(UrlGetRekapCitasiBukuPertahun, requestOptionsGet)
-	.then((result) => {
-		return result.json();
-	})
-	.then((data) => {
-		let tableData = "";
-		data.data.map((values) => {
-			tableData += `
-                        <tr>
-                        <td hidden></td>
-                        <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${values.tahun_terbit}</p>
-                        </td>
-                        <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${values.jumlah_kutipan}</p>
-                        </td>
-                    </tr>`;
-		});
-		document.getElementById("tablebodyRekap").innerHTML = tableData;
-		displayData(halamannow);
-		updatePagination();
-	})
-	.catch(error => {
-		console.log('error', error);
-	});
-
-function displayData(page) {
-	const baris = CihuyQuerySelector("#tablebodyRekap tr");
-	const mulaiindex = (page - 1) * itemperpage;
-	const akhirindex = mulaiindex + itemperpage;
-
-	for (let i = 0; i < baris.length; i++) {
-		if (i >= mulaiindex && i < akhirindex) {
-			baris[i].style.display = "table-row";
-		} else {
-			baris[i].style.display = "none";
-		}
-	}
-}
-function updatePagination() {
-	halamansaatini.textContent = `Halaman ${halamannow}`;
-}
-
-buttonsebelumnya.addEventListener("click", () => {
-	if (halamannow > 1) {
-		halamannow--;
-		displayData(halamannow);
-		updatePagination();
-	}
-});
-
-buttonselanjutnya.addEventListener("click", () => {
-	const totalPages = Math.ceil(
-		tablebody.querySelectorAll("#tablebodyRekap tr").length / itemperpage
-	);
-	if (halamannow < totalPages) {
-		halamannow++;
-		displayData(halamannow);
-		updatePagination();
-	}
-  });
-});
-
-// Fetch Rekap Data Citasi Pertahun By Jenis Publikasi
-CihuyDomReady(() => {
-	const tablebody = CihuyId("tablebodyRekapJenis");
-	const buttonsebelumnya = CihuyId("prevPageBtnRekapJenis");
-	const buttonselanjutnya = CihuyId("nextPageBtnRekapJenis");
-	const halamansaatini = CihuyId("currentPageRekapJenis");
-	const itemperpage = 50;
-	let halamannow = 1;
-
-    fetch(UrlGetRekapCitasiBukuPertahunByJenis, requestOptionsGet)
-        .then((result) => {
-            return result.json();
-        })
-        .then((data) => {
-            let groupedData = {};
-
-            // Kelompokkan data berdasarkan tahun terbit
-            data.data.forEach((item) => {
-                if (!groupedData[item.tahun_terbit]) {
-                    groupedData[item.tahun_terbit] = [];
-                }
-
-                groupedData[item.tahun_terbit].push({
-                    jenis_publikasi: item.jenis_publikasi,
-                    jumlah_kutipan: item.jumlah_kutipan
-                });
-            });
-
-            let tableData = "";
-            // Bangun tabel dari data yang sudah dikelompokkan
-            Object.keys(groupedData).forEach((tahun) => {
-                tableData += `
-                    <tr>
-                        <td hidden></td>
-                        <td style="text-align: center; vertical-align: middle" rowspan="${groupedData[tahun].length}">
-                            <p class="fw-normal mb-1">${tahun}</p>
-                        </td>`;
-
-                    groupedData[tahun].forEach((jenis, index) => {
-                        if (index !== 0) {
-                            tableData += `<tr>`;
-                        }
-                    tableData += `
-                        <td hidden></td>
-                        <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${jenis.jenis_publikasi}</p>
-                        </td>
-                        <td style="text-align: center; vertical-align: middle">
-                            <p class="fw-normal mb-1">${jenis.jumlah_kutipan} Kutipan</p>
-                        </td>
-                    </tr>`;
-                });
-            });
-
-            document.getElementById("tablebodyRekapJenis").innerHTML = tableData;
-            displayData(halamannow);
-            updatePagination();
-        })
-        .catch(error => {
-            console.log('error', error);
+    prodiSelect.addEventListener("change", function() {
+        if (prodiSelect.value === "14") { // D4 Teknik Informatika
+            rekapGrafikD4TI.hidden = false;
+            grafikAllProdi.hidden = true;
+        } else {
+            rekapGrafikD4TI.hidden = true;
+            grafikAllProdi.hidden = false;
+        }
     });
-
-function displayData(page) {
-	const baris = CihuyQuerySelector("#tablebodyRekapJenis tr");
-	const mulaiindex = (page - 1) * itemperpage;
-	const akhirindex = mulaiindex + itemperpage;
-
-	for (let i = 0; i < baris.length; i++) {
-		if (i >= mulaiindex && i < akhirindex) {
-			baris[i].style.display = "table-row";
-		} else {
-			baris[i].style.display = "none";
-		}
-	}
-}
-function updatePagination() {
-	halamansaatini.textContent = `Halaman ${halamannow}`;
-}
-
-buttonsebelumnya.addEventListener("click", () => {
-	if (halamannow > 1) {
-		halamannow--;
-		displayData(halamannow);
-		updatePagination();
-	}
 });
-
-buttonselanjutnya.addEventListener("click", () => {
-	const totalPages = Math.ceil(
-		tablebody.querySelectorAll("#tablebodyRekapJenis tr").length / itemperpage
-	);
-	if (halamannow < totalPages) {
-		halamannow++;
-		displayData(halamannow);
-		updatePagination();
-	}
-  });
-});
-
 
 // Fetch data untuk rekap jumlah citasi publikasi per tahun
 document.addEventListener("DOMContentLoaded", function() {
     // Mendapatkan data dari endpoint API
-    fetch(UrlGetRekapCitasiBukuPertahun, requestOptionsGet)
+    fetch("https://simbe-dev.ulbi.ac.id/api/v1/webometrics/buku/rekapcitasi/get?kode_prodi=14", requestOptionsGet)
         .then(response => response.json())
         .then(data => {
             // Mengubah data response menjadi array labels dan data citasi
@@ -217,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // Fetch data untuk rekap jumlah citasi publikasi per tahun berdasarkan jenis publikasi
 document.addEventListener("DOMContentLoaded", function() {
     // Mendapatkan data dari endpoint API
-    fetch(UrlGetRekapCitasiBukuPertahunByJenis, requestOptionsGet)
+    fetch("https://simbe-dev.ulbi.ac.id/api/v1/webometrics/buku/citasijenistahun/get?kode_prodi=14", requestOptionsGet)
         .then(response => response.json())
         .then(data => {
             // Membuat objek untuk menyimpan data berdasarkan jenis publikasi
