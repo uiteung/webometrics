@@ -22,3 +22,4 @@ export let UrlGetRekapCitasiBukuPertahunByJenis = "https://simbe-dev.ulbi.ac.id/
 export let UrlGetAllBukuByKodeProdi = "https://simbe-dev.ulbi.ac.id/api/v1/webometrics/buku/get";
 export let UrlGetAllPublikasiByKodeProdi = "https://simbe-dev.ulbi.ac.id/api/v1/webometrics/publikasi/get";
 export let UrlGetCitasiPerprodi = "https://simbe-dev.ulbi.ac.id/api/v1/webometrics/publikasi/citasiprodi";
+export let UrlGeCitasiBukuPerprodi = "https://simbe-dev.ulbi.ac.id/api/v1/webometrics/buku/citasiprodi";
