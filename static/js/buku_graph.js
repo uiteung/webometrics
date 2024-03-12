@@ -130,3 +130,95 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error('Error fetching data:', error);
         });
     });
+
+// Fetch data untuk line chart per prodi
+document.addEventListener("DOMContentLoaded", function() {
+    var myChart; // Variabel untuk menyimpan instansiasi Chart
+
+    // Fungsi untuk mendapatkan data dari API
+    function getDataFromAPI(id) {
+        fetch(`https://simbe-dev.ulbi.ac.id/api/v1/webometrics/buku/rekapcitasi/get?kode_prodi=${id}`, requestOptionsGet)
+        .then(response => response.json())
+        .then(data => {
+            // Menyusun data berdasarkan tahun terkecil hingga tahun terbesar
+            const sortedData = data.data.sort((a, b) => a.tahun_terbit - b.tahun_terbit);
+            // Memanggil fungsi untuk membuat grafik setelah mendapatkan data
+            createLineChart(sortedData);
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    // Fungsi untuk membuat grafik garis
+    function createLineChart(data) {
+        // Mendapatkan label (tahun_terbit) dan data (jumlah_kutipan) dari respons API
+        const labels = data.map(item => item.tahun_terbit);
+        const kutipanData = data.map(item => item.jumlah_kutipan);
+
+        // Menghapus instansiasi Chart sebelumnya jika ada
+        if (myChart) {
+            myChart.destroy();
+        }
+
+        // Mendapatkan konteks dari elemen canvas
+        var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
+        var gradient = ctx.createLinearGradient(0, 0, 0, 225);
+        gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
+        gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+
+        // Line chart
+        myChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Jumlah Kutipan",
+                    fill: true,
+                    backgroundColor: gradient,
+                    borderColor: window.theme.primary,
+                    data: kutipanData
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    intersect: false
+                },
+                hover: {
+                    intersect: true
+                },
+                plugins: {
+                    filler: {
+                        propagate: false
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        reverse: true,
+                        gridLines: {
+                            color: "rgba(0,0,0,0.0)"
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            stepSize: 1000
+                        },
+                        display: true,
+                        borderDash: [3, 3],
+                        gridLines: {
+                            color: "rgba(0,0,0,0.0)"
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+    // Mendengarkan perubahan pada dropdown pilih prodi
+    document.getElementById('prodiSelect').addEventListener('change', function() {
+        const selectedProdiId = this.value;
+        getDataFromAPI(selectedProdiId);
+    });
+});

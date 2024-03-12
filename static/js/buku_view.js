@@ -18,6 +18,15 @@ CihuyDomReady(() => {
         const selectedProdiId = this.value;
         const GetAllBukuByKodeProdi = UrlGetAllBukuByKodeProdi+ `?kode_prodi=${selectedProdiId}`;
 
+        // Cek apakah prodi yang dipilih adalah D4 Teknik Informatika (kode_prodi = 14)
+        if (selectedProdiId === "14") {
+            document.getElementById("tableD4TI").hidden = false;
+            document.getElementById("tableAllProdi").hidden = true;
+        } else {
+            document.getElementById("tableD4TI").hidden = true;
+            document.getElementById("tableAllProdi").hidden = false;
+        }
+
         // Fetch data dari API berdasarkan prodi yang dipilih
         fetchData(GetAllBukuByKodeProdi);
     });
@@ -31,43 +40,74 @@ CihuyDomReady(() => {
             .then((data) => {
                 let tableData = "";
                 data.data.map((values) => {
-                    tableData += `
-                        <tr>
-                            <td hidden></td>
-                            <td style="text-align: center; vertical-align: middle">
-                                <p class="fw-normal mb-1">${values.id}</p>
-                            </td>
-                            <td style="text-align: center; vertical-align: middle">
-                                <p class="fw-normal mb-1">${values.nama_dosen}</p>
-                            </td>
-                            <td style="text-align: center; vertical-align: middle">
-                                <p class="fw-normal mb-1">${getNameByCode(values.kode_prodi)}</p>
-                            </td>
-                            <td style="text-align: center; vertical-align: middle">
-                                <p class="fw-normal mb-1">${values.judul_buku}</p>
-                            </td>
-                            <td style="text-align: center; vertical-align: middle">
-                                <p class="fw-normal mb-1">${values.tahun_terbit}</p>
-                            </td>
-                            <td style="text-align: center; vertical-align: middle">
-                                <p class="fw-normal mb-1">${values.penerbit}</p>
-                            </td>
-                            <td style="text-align: center; vertical-align: middle">
-                                <p class="fw-normal mb-1">${values.jenis_publikasi}</p>
-                            </td>
-                            <td style="text-align: center; vertical-align: middle">
-                                <p class="fw-normal mb-1">${values.ranking}</p>
-                            </td>
-                            <td style="text-align: center; vertical-align: middle">
-                                <p class="fw-normal mb-1">${values.jenis_penelitian}</p>
-                            </td>
-                            <td style="text-align: center; vertical-align: middle">
-                                <p class="fw-normal mb-1">${values.autor}</p>
-                            </td>
-                            <td style="text-align: center; vertical-align: middle">
-                                <p class="fw-normal mb-1">${values.jumlah_kutipan}</p>
-                            </td>
-                        </tr>`;
+                    if (values.kode_prodi === 14) {
+                        tableData += `
+                            <tr>
+                                <td hidden></td>
+                                <td style="text-align: center; vertical-align: middle">
+                                    <p class="fw-normal mb-1">${values.id}</p>
+                                </td>
+                                <td style="text-align: center; vertical-align: middle">
+                                    <p class="fw-normal mb-1">${values.nama_dosen}</p>
+                                </td>
+                                <td style="text-align: center; vertical-align: middle">
+                                    <p class="fw-normal mb-1">${getNameByCode(values.kode_prodi)}</p>
+                                </td>
+                                <td style="text-align: center; vertical-align: middle">
+                                    <p class="fw-normal mb-1">${values.judul_buku}</p>
+                                </td>
+                                <td style="text-align: center; vertical-align: middle">
+                                    <p class="fw-normal mb-1">${values.tahun_terbit}</p>
+                                </td>
+                                <td style="text-align: center; vertical-align: middle">
+                                    <p class="fw-normal mb-1">${values.penerbit}</p>
+                                </td>
+                                <td style="text-align: center; vertical-align: middle">
+                                    <p class="fw-normal mb-1">${values.jenis_publikasi}</p>
+                                </td>
+                                <td style="text-align: center; vertical-align: middle">
+                                    <p class="fw-normal mb-1">${values.ranking}</p>
+                                </td>
+                                <td style="text-align: center; vertical-align: middle">
+                                    <p class="fw-normal mb-1">${values.jenis_penelitian}</p>
+                                </td>
+                                <td style="text-align: center; vertical-align: middle">
+                                    <p class="fw-normal mb-1">${values.autor}</p>
+                                </td>
+                                <td style="text-align: center; vertical-align: middle">
+                                    <p class="fw-normal mb-1">${values.jumlah_kutipan}</p>
+                                </td>
+                            </tr>`;
+                        } else {
+                            tableData += `
+                                <tr>
+                                    <td hidden></td>
+                                    <td style="text-align: center; vertical-align: middle">
+                                        <p class="fw-normal mb-1">${values.id}</p>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle">
+                                        <p class="fw-normal mb-1">${values.nama_dosen}</p>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle">
+                                        <p class="fw-normal mb-1">${getNameByCode(values.kode_prodi)}</p>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle">
+                                        <p class="fw-normal mb-1">${values.judul_buku}</p>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle">
+                                        <p class="fw-normal mb-1">${values.tahun_terbit}</p>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle">
+                                        <p class="fw-normal mb-1">${values.penerbit}</p>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle">
+                                        <p class="fw-normal mb-1">${values.autor}</p>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle">
+                                        <p class="fw-normal mb-1">${values.jumlah_kutipan}</p>
+                                    </td>
+                                </tr>`;
+                        }
                 });
                 document.getElementById("tablebody").innerHTML = tableData;
 
