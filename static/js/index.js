@@ -1,16 +1,13 @@
-import { requestOptionsGet, UrlGeCitasiBukuPerprodi, UrlGetRekapCitasiPublikasiPertahun, UrlGetAllPublikasi, UrlGetAllBuku } from "./controller/template.js";
+import { requestOptionsGet, UrlGetCitasiPerprodi, UrlGeCitasiBukuPerprodi, UrlGetRekapCitasiPublikasiPertahun, UrlGetAllPublikasi, UrlGetAllBuku } from "./controller/template.js";
 
 // Fetch Data Get All Publikasi
 fetch(UrlGetAllPublikasi, requestOptionsGet)
   .then(response => response.json())
   .then(data => {
-    // Menghitung jumlah total kutipan
     let totalKutipan = 0;
     data.data.forEach(publikasi => {
       totalKutipan += publikasi.jumlah_kutipan;
     });
-
-    // Menampilkan jumlah total kutipan pada elemen dengan id "jumlahPublikasi"
     document.getElementById('jumlahPublikasi').textContent = totalKutipan;
   })
 .catch(error => console.error('Error:', error));
@@ -19,37 +16,26 @@ fetch(UrlGetAllPublikasi, requestOptionsGet)
 fetch(UrlGetAllBuku, requestOptionsGet)
   .then(response => response.json())
   .then(data => {
-    // Menghitung jumlah total kutipan
     let totalKutipan = 0;
     data.data.forEach(buku => {
       totalKutipan += buku.jumlah_kutipan;
     });
-
-    // Menampilkan jumlah total kutipan pada elemen dengan id "jumlahBuku"
     document.getElementById('jumlahBuku').textContent = totalKutipan;
   })
 .catch(error => console.error('Error:', error));
 
 // Untuk Fetch Data in Line Chart
 document.addEventListener("DOMContentLoaded", function() {
-    // Fetch data from API
     fetch(UrlGetRekapCitasiPublikasiPertahun, requestOptionsGet)
         .then((response) => response.json())
         .then((data) => {
-            // Sort data by year
             data.data.sort((a, b) => parseInt(a.tahun_terbit) - parseInt(b.tahun_terbit));
-
-            // Extract years and citation counts from the data
             const years = data.data.map((entry) => entry.tahun_terbit);
             const citationCounts = data.data.map((entry) => entry.jumlah_kutipan);
-
-            // Get chart canvas context
             var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
             var gradient = ctx.createLinearGradient(0, 0, 0, 225);
             gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
             gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
-
-            // Create line chart
             new Chart(ctx, {
                 type: "line",
                 data: {
@@ -87,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         }],
                         yAxes: [{
                             ticks: {
-                                stepSize: 100 // You may want to adjust the step size according to your data
+                                stepSize: 100
                             },
                             display: true,
                             borderDash: [3, 3],
@@ -106,10 +92,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Fetch Data Jumlah Kutipan Terbanyak Per Prodi
 document.addEventListener("DOMContentLoaded", function() {
-    fetch('https://simbe-dev.ulbi.ac.id/api/v1/webometrics/publikasi/citasiprodi', requestOptionsGet)
+    fetch(UrlGetCitasiPerprodi, requestOptionsGet)
         .then(response => response.json())
         .then(data => {
-            // Objek untuk menghubungkan kode prodi dengan nama prodi
             const prodiData = [
                 { kode_prodi: 14, nama: "D4 Teknik Informatika" },
                 { kode_prodi: 13, nama: "D3 Teknik Informatika" },
@@ -128,17 +113,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 { kode_prodi: 85, nama: "S1 Manajemen Rekayasa" },
                 { kode_prodi: 101, nama: "S2 Manajemen Logistik" }
             ];
-
-            // Sorting data by jumlah_kutipan
             data.data.sort((a, b) => b.jumlah_kutipan - a.jumlah_kutipan);
-
             const labels = data.data.map(entry => {
                 const prodi = prodiData.find(prodi => prodi.kode_prodi === entry.kode_prodi);
-                return prodi ? prodi.nama : ''; // Menggunakan nama prodi sebagai label
+                return prodi ? prodi.nama : '';
             });
-            const kutipan = data.data.map(entry => entry.jumlah_kutipan); // Mengambil jumlah kutipan dari respons API
-
-            // Membuat bar chart dengan Chart.js
+            const kutipan = data.data.map(entry => entry.jumlah_kutipan);
             new Chart(document.getElementById("chartjs-dashboard-bar"), {
                 type: "bar",
                 data: {
@@ -166,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             },
                             stacked: false,
                             ticks: {
-                                stepSize: 100 // Sesuaikan langkah kenaikan sumbu y sesuai kebutuhan
+                                stepSize: 100
                             }
                         }],
                         xAxes: [{
@@ -187,7 +167,6 @@ document.addEventListener("DOMContentLoaded", function() {
     fetch(UrlGeCitasiBukuPerprodi, requestOptionsGet)
         .then(response => response.json())
         .then(data => {
-            // Objek untuk menghubungkan kode prodi dengan nama prodi
             const prodiData = [
                 { kode_prodi: 14, nama: "D4 Teknik Informatika" },
                 { kode_prodi: 13, nama: "D3 Teknik Informatika" },
@@ -206,17 +185,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 { kode_prodi: 85, nama: "S1 Manajemen Rekayasa" },
                 { kode_prodi: 101, nama: "S2 Manajemen Logistik" }
             ];
-
-            // Sorting data by jumlah_kutipan
             data.data.sort((a, b) => b.jumlah_kutipan - a.jumlah_kutipan);
-
             const labels = data.data.map(entry => {
                 const prodi = prodiData.find(prodi => prodi.kode_prodi === entry.kode_prodi);
-                return prodi ? prodi.nama : ''; // Menggunakan nama prodi sebagai label
+                return prodi ? prodi.nama : '';
             });
-            const kutipan = data.data.map(entry => entry.jumlah_kutipan); // Mengambil jumlah kutipan dari respons API
-
-            // Membuat bar chart dengan Chart.js
+            const kutipan = data.data.map(entry => entry.jumlah_kutipan);
             new Chart(document.getElementById("chartjs-buku-bar"), {
                 type: "bar",
                 data: {
@@ -244,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             },
                             stacked: false,
                             ticks: {
-                                stepSize: 100 // Sesuaikan langkah kenaikan sumbu y sesuai kebutuhan
+                                stepSize: 100
                             }
                         }],
                         xAxes: [{
