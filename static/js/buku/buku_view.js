@@ -1,8 +1,10 @@
+// Import library yang dibutuhkan
 import { CihuyId } from "https://c-craftjs.github.io/element/element.js";
 import { CihuyDomReady, CihuyQuerySelector } from "https://c-craftjs.github.io/table/table.js";
 import { UrlGetAllBukuByKodeProdi, requestOptionsGet } from "../controller/template.js";
 import { getNameByCode } from "../style/codemapping.js";
 
+// Untuk Fetch Data Buku
 CihuyDomReady(() => {
     const tablebody = CihuyId("tablebody");
     const buttonsebelumnya = CihuyId("prevPageBtn");
@@ -26,8 +28,6 @@ CihuyDomReady(() => {
             document.getElementById("tableD4TI").hidden = true;
             document.getElementById("tableAllProdi").hidden = false;
         }
-
-        // Fetch data dari API berdasarkan prodi yang dipilih
         fetchData(GetAllBukuByKodeProdi);
     });
 
