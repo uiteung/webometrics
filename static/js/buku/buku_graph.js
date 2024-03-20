@@ -1,5 +1,5 @@
 // Import library yang ditambahkan
-import { UrlGetRekapCitasiBukuPertahunByProdi, UrlGetRekapCitasiBukuPertahunByJenisByProdi, requestOptionsGet } from "../controller/template.js";
+import { UrlGetAllBukuByKodeProdi, UrlGetRekapCitasiBukuPertahunByProdi, UrlGetRekapCitasiBukuPertahunByJenisByProdi, requestOptionsGet } from "../controller/template.js";
 
 // Conditional untuk D4 TI dan yg bukan
 document.addEventListener("DOMContentLoaded", function() {
@@ -199,4 +199,27 @@ document.addEventListener("DOMContentLoaded", function() {
         const selectedProdiId = this.value;
         getDataFromAPI(selectedProdiId);
     });
+});
+
+// Fetch Data Kontributor dengan jumlah citasinya
+fetch(UrlGetAllBukuByKodeProdi + `/kode_prodi=${id}`, requestOptionsGet)
+    .then(response => response.json())
+    .then(data => {
+        let tableData = "";
+        data.data.forEach((dosen, index) => {
+            let totalKutipan = data.data.reduce((total, publikasi) => {
+                return dosen.nama_dosen === publikasi.nama_dosen ? total + publikasi.jumlah_kutipan : total;
+            }, 0);
+            tableData += `
+                <tr>
+                    <td hidden></td>
+                    <td style="text-align: center; vertical-align: middle">${index + 1}</td>
+                    <td style="text-align: center; vertical-align: middle">${dosen.nama_dosen}</td>
+                    <td style="text-align: center; vertical-align: middle">${totalKutipan}</td>
+                </tr>`;
+        });
+        document.getElementById("tablebodyKontributor").innerHTML = tableData;
+    })
+    .catch(error => {
+        console.log('Error:', error);
 });
