@@ -208,16 +208,21 @@ document.getElementById('prodiSelect').addEventListener('change', function() {
     fetch(UrlGetAllBukuByKodeProdi + `?kode_prodi=${selectedProdiId}`, requestOptionsGet)
         .then(response => response.json())
         .then(data => {
+            let totalKutipanPerDosen = {};
+            data.data.forEach(publikasi => {
+                if (!totalKutipanPerDosen.hasOwnProperty(publikasi.nama_dosen)) {
+                    totalKutipanPerDosen[publikasi.nama_dosen] = 0;
+                }
+                totalKutipanPerDosen[publikasi.nama_dosen] += publikasi.jumlah_kutipan;
+            });
+
             let tableData = "";
-            data.data.forEach((dosen, index) => {
-                let totalKutipan = data.data.reduce((total, publikasi) => {
-                    return dosen.nama_dosen === publikasi.nama_dosen ? total + publikasi.jumlah_kutipan : total;
-                }, 0);
+            Object.entries(totalKutipanPerDosen).forEach(([namaDosen, totalKutipan], index) => {
                 tableData += `
                     <tr>
                         <td hidden></td>
                         <td style="text-align: center; vertical-align: middle">${index + 1}</td>
-                        <td style="text-align: center; vertical-align: middle">${dosen.nama_dosen}</td>
+                        <td style="text-align: center; vertical-align: middle">${namaDosen}</td>
                         <td style="text-align: center; vertical-align: middle">${totalKutipan}</td>
                     </tr>`;
             });
