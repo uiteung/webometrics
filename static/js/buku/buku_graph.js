@@ -216,8 +216,10 @@ document.getElementById('prodiSelect').addEventListener('change', function() {
                 totalKutipanPerDosen[publikasi.nama_dosen] += publikasi.jumlah_kutipan;
             });
 
+            let sortedTotalKutipanPerDosen = Object.entries(totalKutipanPerDosen).sort((a, b) => b[1] - a[1]);
+
             let tableData = "";
-            Object.entries(totalKutipanPerDosen).forEach(([namaDosen, totalKutipan], index) => {
+            sortedTotalKutipanPerDosen.forEach(([namaDosen, totalKutipan], index) => {
                 tableData += `
                     <tr>
                         <td hidden></td>
