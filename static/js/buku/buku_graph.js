@@ -8,7 +8,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const grafikAllProdi = document.getElementById("grafikAllProdi");
 
     prodiSelect.addEventListener("change", function() {
-        if (prodiSelect.value === "14") {
+        if (prodiSelect.value === "") {
+            rekapGrafikD4TI.hidden = false;
+            grafikAllProdi.hidden = false;
+        } else if (prodiSelect.value === "14") {
             rekapGrafikD4TI.hidden = false;
             grafikAllProdi.hidden = true;
         } else {
