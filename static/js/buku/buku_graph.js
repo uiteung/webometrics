@@ -202,24 +202,28 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Fetch Data Kontributor dengan jumlah citasinya
-fetch(UrlGetAllBukuByKodeProdi + `/kode_prodi=${id}`, requestOptionsGet)
-    .then(response => response.json())
-    .then(data => {
-        let tableData = "";
-        data.data.forEach((dosen, index) => {
-            let totalKutipan = data.data.reduce((total, publikasi) => {
-                return dosen.nama_dosen === publikasi.nama_dosen ? total + publikasi.jumlah_kutipan : total;
-            }, 0);
-            tableData += `
-                <tr>
-                    <td hidden></td>
-                    <td style="text-align: center; vertical-align: middle">${index + 1}</td>
-                    <td style="text-align: center; vertical-align: middle">${dosen.nama_dosen}</td>
-                    <td style="text-align: center; vertical-align: middle">${totalKutipan}</td>
-                </tr>`;
-        });
-        document.getElementById("tablebodyKontributor").innerHTML = tableData;
-    })
-    .catch(error => {
-        console.log('Error:', error);
+document.getElementById('prodiSelect').addEventListener('change', function() {
+    const selectedProdiId = this.value;
+    
+    fetch(UrlGetAllBukuByKodeProdi + `/kode_prodi=${selectedProdiId}`, requestOptionsGet)
+        .then(response => response.json())
+        .then(data => {
+            let tableData = "";
+            data.data.forEach((dosen, index) => {
+                let totalKutipan = data.data.reduce((total, publikasi) => {
+                    return dosen.nama_dosen === publikasi.nama_dosen ? total + publikasi.jumlah_kutipan : total;
+                }, 0);
+                tableData += `
+                    <tr>
+                        <td hidden></td>
+                        <td style="text-align: center; vertical-align: middle">${index + 1}</td>
+                        <td style="text-align: center; vertical-align: middle">${dosen.nama_dosen}</td>
+                        <td style="text-align: center; vertical-align: middle">${totalKutipan}</td>
+                    </tr>`;
+            });
+            document.getElementById("tablebodyKontributor").innerHTML = tableData;
+        })
+        .catch(error => {
+            console.log('Error:', error);
+    });
 });
