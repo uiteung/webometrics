@@ -204,8 +204,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // Fetch Data Kontributor dengan jumlah citasinya
 document.getElementById('prodiSelect').addEventListener('change', function() {
     const selectedProdiId = this.value;
-    
-    fetch(UrlGetAllBukuByKodeProdi + `/kode_prodi=${selectedProdiId}`, requestOptionsGet)
+
+    fetch(UrlGetAllBukuByKodeProdi + `?kode_prodi=${selectedProdiId}`, requestOptionsGet)
         .then(response => response.json())
         .then(data => {
             let tableData = "";
