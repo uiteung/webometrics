@@ -8,12 +8,10 @@
 	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
 	<meta name="author" content="AdminKit">
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link rel="shortcut icon" href="static/img/icons/icon-48x48.png" />
-
 	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
-
+	
 	<title>Analisis Capaian Webometrics</title>
 
 	<link href="static/css/app.css" rel="stylesheet">
@@ -28,30 +26,28 @@
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<!-- <div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" style="text-align: center;" href="index.html">
-          <span class="align-middle">Webometrics</span>
-        </a>
+          			<span class="align-middle">Webometrics</span>
+        		</a>
 
 				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Submenu Webometrics
-					</li>
+					<li class="sidebar-header">Submenu Webometrics</li>
 
 					<li class="sidebar-item active">
 						<a class="sidebar-link" href="index.html">
-              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-            </a>
+              				<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+            			</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="publikasi/publikasi_view.html">
-              <i class="align-middle" data-feather="file"></i> <span class="align-middle">Data Publikasi</span>
-            </a>
+              				<i class="align-middle" data-feather="file"></i> <span class="align-middle">Data Publikasi</span>
+            			</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="buku/buku_view.html">
-              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Data Buku</span>
-            </a>
+              				<i class="align-middle" data-feather="book"></i> <span class="align-middle">Data Buku</span>
+            			</a>
 					</li>
 				</ul>
 
@@ -79,10 +75,9 @@
 			<!-- Main Content Start -->
 			<main class="content">
 				<div class="container-fluid p-0">
-
 					<h1 class="h3 mb-3">Selamat Datang di<strong> Dashboard Webometrics</strong></h1>
-
 					<div class="row">
+						<!-- Card Rekap Total Publikasi Jurnal & Buku Start -->
 						<div class="col-xl-6 col-xxl-5 d-flex">
 							<div class="w-100">
 								<div class="row">
@@ -129,6 +124,7 @@
 								</div>
 							</div>
 						</div>
+						<!-- Card Rekap Total Publikasi Jurnal & Buku End -->
 
 						<!-- Line Chart Pertumbuhan Jumlah Kutipan Start -->
 						<div class="col-xl-6 col-xxl-7">
@@ -146,6 +142,8 @@
 						</div>
 						<!-- Line Chart Pertumbuhan Jumlah Kutipan End -->
 					</div>
+
+					<!-- Rekap Grafik Jumlah Citasi Publikasi Jurnal Perprodi Start -->
 					<div class="card">
 						<div class="col-12 col-lg-12">
 							<div class="card">
@@ -161,7 +159,9 @@
 							</div>
 						</div>
 					</div>
+					<!-- Rekap Grafik Jumlah Citasi Publikasi Jurnal Perprodi End -->
 
+					<!-- Rekap Grafik Jumlah Citasi Buku Perprodi Start -->
 					<div class="card">
 						<div class="col-12 col-lg-12">
 							<div class="card">
@@ -177,6 +177,8 @@
 							</div>
 						</div>
 					</div>
+					<!-- Rekap Grafik Jumlah Citasi Buku Perprodi End -->
+
 				</div>
 			</main>
 			<!-- Main Content End -->
@@ -187,24 +189,25 @@
 
 		</div>
 	</div>
+	<!-- Javascript for Fetch Data -->
+	<script src="static/js/index.js" type="module"></script>
+	<script src="static/js/style/codemapping.js" type="module"></script>
+	<!-- Javascript for Authentification -->
 	<script src="static/js/controller/croot.js" type="module"></script>
 	<script src="static/theme/bar/sidebar.js" type="module"></script>
 	<script src="static/theme/bar/navbar.js" type="module"></script>
 	<script src="static/theme/bar/footer.js" type="module"></script>
-	<script src="static/js/controller/croot.js"></script>
 	<script src="static/js/app.js"></script>
-	<script src="static/js/index.js" type="module"></script>
-	<script src="static/js/style/codemapping.js" type="module"></script>
+	<!-- Javascript Library for Style -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
 	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<!-- Javascript for Content Loaded Feather -->
 	<script>
 		document.addEventListener("DOMContentLoaded", function(event) {
 			feather.replace();
 		});
 	</script>
-	
-</body>
 
+</body>
 </html>
