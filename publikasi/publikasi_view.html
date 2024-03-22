@@ -8,10 +8,8 @@
 	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
 	<meta name="author" content="AdminKit">
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link rel="shortcut icon" href="../static/img/icons/icon-48x48.png" />
-
 	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
 	<title>Analisis Capaian Webometrics</title>
@@ -28,30 +26,28 @@
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" style="text-align: center;" href="../index.html">
-          <span class="align-middle">Webometrics</span>
-        </a>
+        			<span class="align-middle">Webometrics</span>
+        		</a>
 
 				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Submenu Webometrics
-					</li>
+					<li class="sidebar-header">Submenu Webometrics</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="../index.html">
-              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-            </a>
+							<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+            			</a>
 					</li>
 
 					<li class="sidebar-item active">
 						<a class="sidebar-link" href="publikasi_view.html">
-              <i class="align-middle" data-feather="file"></i> <span class="align-middle">Data Publikasi</span>
-            </a>
+							<i class="align-middle" data-feather="file"></i> <span class="align-middle">Data Publikasi</span>
+						</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="../buku/buku_view.html">
-              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Data Buku</span>
-            </a>
+							<i class="align-middle" data-feather="book"></i> <span class="align-middle">Data Buku</span>
+						</a>
 					</li>
 				</ul>
 
@@ -86,6 +82,7 @@
 				  <a href="publikasi_graph.html" class="btn btn-primary mb-3">Lihat Grafik & Rekap</a>
 				  <div class="row justify-content-center">
 					<div class="col-12">
+						<!-- Field Inputan Program Studi Start -->
 						<div class="card">
 							<div class="card-header">
 								<h5 class="card-title mb-2">Program Studi</h5>
@@ -109,89 +106,93 @@
 									<option value="101">S2 Manajemen Logistik</option>
 								</select>
 							</div>
-						  </div>  
-					  <div class="card">
-						<div class="card-header">
-						  <div class="row no-gutters" style="height: 40px">
-							<h1 class="h3 mt-2">Tabel Rekap Publikasi</h1>
-							<div
-							  class="col-md-3"
-							  style="
-								position: absolute;
-								top: 0;
-								right: 0;
-								width: 15%;
-								margin-top: 20px;
-							  ">
-							  <input
-								type="text"
-								class="form-control"
-								id="searchInput"
-								placeholder="Cari" />
-							</div>
-						  </div>
-	  
-						  <hr />
-						  <div class="table-container">
-							<table
-							  class="table table-striped"
-							  style="width: 100%">
-							  <thead id="tableD4TI">
-								<tr style="text-align: center; vertical-align: middle">
-								  <th hidden></th>
-								  <th>No</th>
-								  <th>Nama Dosen</th>
-								  <th>Program Studi</th>
-								  <th>Judul Paper</th>
-								  <th>Tahun Terbit</th>
-								  <th>Nama Publikasi/Jurnal/Penerbit</th>
-								  <th id="jenisPublikasiHeader">Jenis Publikasi</th>
-								  <th id="rankingHeader">Ranking</th>
-								  <th id="jenisPenelitianHeader">Jenis Penelitian</th>
-								  <th>Autor</th>
-								  <th>Jumlah Kutipan</th>
-								</tr>
-							  </thead>
-							  
-							  <thead id="tableAllProdi" hidden>
-								<tr style="text-align: center; vertical-align: middle">
-								  <th hidden></th>
-								  <th>No</th>
-								  <th>Nama Dosen</th>
-								  <th>Program Studi</th>
-								  <th>Judul Paper</th>
-								  <th>Tahun Terbit</th>
-								  <th>Nama Publikasi/Jurnal/Penerbit</th>
-								  <th>Autor</th>
-								  <th>Jumlah Kutipan</th>
-								</tr>
-							  </thead>
-
-							  <!-- Data Rekap Publikasi -->
-							  <tbody id="tablebody"></tbody>
-							  <!-- Data Rekap Publikasi -->
-
-							</table>
-						  </div>
-						  <div class="row">
-							<div class="col-md-6">
-							  <div class="pagination">
-								<button
-								  id="prevPageBtn"
-								  class="btn btn-primary">
-								  Previous
-								</button>
-								<span id="currentPage" class="mx-2">Halaman 1</span>
-								<button
-								  id="nextPageBtn"
-								  class="btn btn-primary">
-								  Next
-								</button>
-							  </div>
-							</div>
-						  </div>
 						</div>
-					  </div>
+						<!-- Field Inputan Program Studi End -->
+
+						<!-- Tabel Rekap Publikasi Start -->
+						<div class="card">
+							<div class="card-header">
+							<div class="row no-gutters" style="height: 40px">
+								<h1 class="h3 mt-2">Tabel Rekap Publikasi</h1>
+								<div
+								class="col-md-3"
+								style="
+									position: absolute;
+									top: 0;
+									right: 0;
+									width: 15%;
+									margin-top: 20px;
+								">
+								<input
+									type="text"
+									class="form-control"
+									id="searchInput"
+									placeholder="Cari" />
+								</div>
+							</div>
+		
+							<hr />
+							<div class="table-container">
+								<table
+								class="table table-striped"
+								style="width: 100%">
+								<thead id="tableD4TI">
+									<tr style="text-align: center; vertical-align: middle">
+									<th hidden></th>
+									<th>No</th>
+									<th>Nama Dosen</th>
+									<th>Program Studi</th>
+									<th>Judul Paper</th>
+									<th>Tahun Terbit</th>
+									<th>Nama Publikasi/Jurnal/Penerbit</th>
+									<th id="jenisPublikasiHeader">Jenis Publikasi</th>
+									<th id="rankingHeader">Ranking</th>
+									<th id="jenisPenelitianHeader">Jenis Penelitian</th>
+									<th>Autor</th>
+									<th>Jumlah Kutipan</th>
+									</tr>
+								</thead>
+								
+								<thead id="tableAllProdi" hidden>
+									<tr style="text-align: center; vertical-align: middle">
+									<th hidden></th>
+									<th>No</th>
+									<th>Nama Dosen</th>
+									<th>Program Studi</th>
+									<th>Judul Paper</th>
+									<th>Tahun Terbit</th>
+									<th>Nama Publikasi/Jurnal/Penerbit</th>
+									<th>Autor</th>
+									<th>Jumlah Kutipan</th>
+									</tr>
+								</thead>
+
+								<!-- Data Rekap Publikasi -->
+								<tbody id="tablebody"></tbody>
+								<!-- Data Rekap Publikasi -->
+
+								</table>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+								<div class="pagination">
+									<button
+									id="prevPageBtn"
+									class="btn btn-primary">
+									Previous
+									</button>
+									<span id="currentPage" class="mx-2">Halaman 1</span>
+									<button
+									id="nextPageBtn"
+									class="btn btn-primary">
+									Next
+									</button>
+								</div>
+								</div>
+							</div>
+						   </div>
+						</div>
+						<!-- Tabel Rekap Publikasi End -->
 					</div>
 				  </div>
 				</div>
@@ -204,12 +205,15 @@
 
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- Javascript for Fetch Data -->
+	<script src="../static/js/publikasi/publikasi_view.js" type="module"></script>
+	<!-- Javascript for Authentification -->
+	<script src="../static/js/controller/croot.js" type="module"></script>
 	<script src="../static/theme/bar/footer.js" type="module"></script>
 	<script src="../static/theme/bar/navbar.js" type="module"></script>
 	<script src="../static/js/app.js"></script>
-	<script src="../static/js/publikasi/publikasi_view.js" type="module"></script>
-	<script src="../static/js/controller/croot.js" type="module"></script>
+	<!-- Javascript Library for Style -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 
