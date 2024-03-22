@@ -8,10 +8,8 @@
 	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
 	<meta name="author" content="AdminKit">
 	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link rel="shortcut icon" href="../static/img/icons/icon-48x48.png" />
-
 	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
 	<title>Analisis Capaian Webometrics</title>
@@ -28,30 +26,27 @@
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" style="text-align: center;" href="../index.html">
-          <span class="align-middle">Webometrics</span>
-        </a>
-
+          			<span class="align-middle">Webometrics</span>
+				</a>
 				<ul class="sidebar-nav">
-					<li class="sidebar-header">
-						Submenu Webometrics
-					</li>
+					<li class="sidebar-header">Submenu Webometrics</li>
 
-          <li class="sidebar-item">
+					<li class="sidebar-item">
 						<a class="sidebar-link" href="../index.html">
-              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
-            </a>
+							<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+						</a>
 					</li>
 
 					<li class="sidebar-item active">
 						<a class="sidebar-link" href="publikasi_view.html">
-              <i class="align-middle" data-feather="file"></i> <span class="align-middle">Data Publikasi</span>
-            </a>
+							<i class="align-middle" data-feather="file"></i> <span class="align-middle">Data Publikasi</span>
+						</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="../buku/buku_view.html">
-              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Data Buku</span>
-            </a>
+							<i class="align-middle" data-feather="book"></i> <span class="align-middle">Data Buku</span>
+						</a>
 					</li>
 				</ul>
 
@@ -85,6 +80,8 @@
 				  <h1 class="h3 mb-3"><b>Rekap dan Grafik Publikasi</b></h1>
 				  <div class="row justify-content-center">
 					<div class="col-12">
+
+						<!-- Field Inputan Program Studi Start -->
             			<div class="card">
 							<div class="card-header">
 								<h5 class="card-title mb-2">Program Studi</h5>
@@ -108,11 +105,13 @@
 									<option value="101">S2 Manajemen Logistik</option>
 								</select>
 							</div>
-						</div>  
-                      <!-- Rekap Grafik Start -->
-					            <div class="card" id="rekapGrafikD4TI">
-						            <div class="card-header">
-                            <div class="row">
+						</div>
+						<!-- Field Inputan Program Studi End -->
+
+                      	<!-- Rekap Grafik Start -->
+					    <div class="card" id="rekapGrafikD4TI">
+						    <div class="card-header">
+                            	<div class="row">
 
                                 <!-- Rekap Citasi Publikasi Per Tahun -->
                                 <div class="col-12 col-lg-6">
@@ -143,15 +142,14 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-						              </div>
-					            </div>
+						</div>
+					</div>
 
+					<!-- Rekap Grafik Line Chart Start -->
                       <div id="grafikAllProdi" class="col-xl-6 col-xxl-12" hidden>
                         <div class="card flex-fill w-100">
                           <div class="card-header">
-          
                             <h5 class="card-title mb-0">Line Chart Pertumbuhan Jumlah Kutipan</h5>
                           </div>
                           <div class="card-body py-3">
@@ -161,7 +159,9 @@
                           </div>
                         </div>
                       </div>
-                      <!-- Rekap Grafik End -->
+					<!-- Rekap Grafik Line Chart End -->
+
+                    <!-- Rekap Grafik End -->
 					</div>
 				  </div>
 				</div>
@@ -174,12 +174,15 @@
 
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- Javascript for fetch data -->
+	<script src="../static/js/publikasi/publikasi_graph.js" type="module"></script>
+	<!-- Javascript for Authentification -->
 	<script src="../static/theme/bar/footer.js" type="module"></script>
 	<script src="../static/theme/bar/navbar.js" type="module"></script>
-	<script src="../static/js/app.js"></script>
-  	<script src="../static/js/publikasi/publikasi_graph.js" type="module"></script>
 	<script src="../static/js/controller/croot.js" type="module"></script>
+	<script src="../static/js/app.js"></script>
+	<!-- Javascript Library for Style -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 
